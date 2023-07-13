@@ -21,4 +21,11 @@ public class UserService {
     public List<User> findAll() {
         return users;
     }
+
+    public User findUser(Integer userId) {
+        return users.stream()
+                .filter(user -> user.getId().equals(userId))
+                .findFirst()
+                .orElse(new User(0, "", LocalDate.now()));
+    }
 }
