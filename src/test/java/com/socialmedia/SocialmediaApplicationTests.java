@@ -1,10 +1,10 @@
-package com.microservices.restfulwebservices;
+package com.socialmedia;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestfulWebServicesApplicationTests {
+class SocialmediaApplicationTests {
 
 	@Test
 	void contextLoads() {

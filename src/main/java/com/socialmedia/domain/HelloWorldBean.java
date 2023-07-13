@@ -1,4 +1,4 @@
-package com.microservices.restfulwebservices.domain;
+package com.socialmedia.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

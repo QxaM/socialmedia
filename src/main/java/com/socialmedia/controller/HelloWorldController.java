@@ -1,6 +1,6 @@
-package com.microservices.restfulwebservices.controller;
+package com.socialmedia.controller;
 
-import com.microservices.restfulwebservices.domain.HelloWorldBean;
+import com.socialmedia.domain.HelloWorldBean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,4 +18,6 @@ public class HelloWorldController {
     public HelloWorldBean helloWorldBean() {
         return new HelloWorldBean("Hello World!");
     }
+
+
 }
