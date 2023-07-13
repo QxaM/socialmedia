@@ -2,6 +2,7 @@ package com.socialmedia.controller;
 
 import com.socialmedia.domain.HelloWorldBean;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,8 @@ public class HelloWorldController {
         return new HelloWorldBean("Hello World!");
     }
 
-
+    @GetMapping("hello-world/{name}")
+    public HelloWorldBean helloWorldName(@PathVariable String name) {
+        return new HelloWorldBean(String.format("Hello World, %s!", name));
+    }
 }
