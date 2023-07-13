@@ -1,6 +1,7 @@
 package com.socialmedia.service;
 
 import com.socialmedia.domain.User;
+import com.socialmedia.domain.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -28,7 +29,7 @@ public class UserService {
         return users.stream()
                 .filter(user -> user.getId().equals(userId))
                 .findFirst()
-                .orElse(new User(0, "", LocalDate.now()));
+                .orElseThrow(() -> new UserNotFoundException("User with id: " + userId + " was not found!"));
     }
 
     public User save(User user) {
