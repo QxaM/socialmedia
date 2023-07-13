@@ -40,4 +40,8 @@ public class UserService {
         users.add(newUser);
         return newUser;
     }
+
+    public void deleteById(Integer userId) {
+        users.removeIf(user -> user.getId().equals(userId));
+    }
 }

@@ -37,4 +37,10 @@ public class UserController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        service.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }
