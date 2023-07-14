@@ -4,12 +4,17 @@ import com.socialmedia.domain.User;
 import com.socialmedia.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("v1/users")
@@ -24,8 +29,14 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public User getUser(@PathVariable Integer id) {
-        return service.findUser(id);
+    public EntityModel<User> getUser(@PathVariable Integer id) {
+        User user = service.findUser(id);
+        EntityModel<User> entityModel = EntityModel.of(user);
+
+        WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).getAllUsers());
+        entityModel.add(link.withRel("all-users"));
+
+        return entityModel;
     }
 
     @PostMapping
