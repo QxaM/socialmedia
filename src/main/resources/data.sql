@@ -1,0 +1,8 @@
+INSERT INTO USERS(ID, USER_NAME, BIRTH_DATE)
+VALUES (10001, 'Piotr', current_date());
+
+INSERT INTO USERS(ID, USER_NAME, BIRTH_DATE)
+VALUES (10002, 'Jacek', current_date());
+
+INSERT INTO USERS(ID, USER_NAME, BIRTH_DATE)
+VALUES (10003, 'Marcin', current_date());
