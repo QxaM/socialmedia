@@ -1,5 +1,6 @@
 package com.socialmedia.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -31,4 +33,11 @@ public class User {
     @JsonProperty("birth_date")
     @Column(name = "BIRTH_DATE")
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "user",
+                fetch = FetchType.LAZY,
+                cascade = CascadeType.REMOVE,
+                targetEntity = Post.class)
+    @JsonIgnore
+    private List<Post> posts;
 }

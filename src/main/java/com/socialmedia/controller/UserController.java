@@ -1,6 +1,8 @@
 package com.socialmedia.controller;
 
+import com.socialmedia.domain.Post;
 import com.socialmedia.domain.User;
+import com.socialmedia.service.PostService;
 import com.socialmedia.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class UserController {
 
     private final UserService service;
+    private final PostService postService;
 
     @GetMapping
     public List<User> getAllUsers() {
@@ -54,5 +57,23 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         service.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("{id}/posts")
+    public List<Post> retrievePostForUser(@PathVariable Integer id) {
+        User user = service.findUser(id);
+        return user.getPosts();
+    }
+
+    @PostMapping("{id}/posts")
+    public ResponseEntity<User> createPostForUser(@PathVariable Integer id,
+                                                  @Valid @RequestBody Post post) {
+        Post savedPost = postService.createPost(id, post);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedPost.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
 }
